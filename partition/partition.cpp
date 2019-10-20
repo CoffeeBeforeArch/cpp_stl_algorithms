@@ -46,7 +46,7 @@ int main() {
   // (same as returned by partition)
   auto p =
       partition_point(begin(a), end(a), [](auto &em) { return em % 2 == 0; });
-  cout << "mid == p? " << (mid_1 == p) << endl;
+  cout << "mid_1 == p? " << (mid_1 == p) << endl;
 
   // Reset the array
   a = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
@@ -66,7 +66,7 @@ int main() {
   array<int, 5> out_2;
 
   // Partition copy does the same thing as partition, but copies the result to
-  // two different ranges
+  // two different ranges, and does not change the original element ordering
   // Returns a pair of iterators to the end of the true and false ranges
   auto pair = partition_copy(begin(a), end(a), begin(out_1), begin(out_2),
                              [](auto &em) { return em % 2 == 0; });
@@ -74,6 +74,6 @@ int main() {
   print(out_1);
   cout << "False partition range" << endl;
   print(out_2);
-
+  
   return 0;
 }
