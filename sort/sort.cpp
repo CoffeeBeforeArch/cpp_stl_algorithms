@@ -3,6 +3,7 @@
 
 #include <algorithm>
 #include <iostream>
+#include <string>
 #include <vector>
 
 using std::cout;
@@ -14,14 +15,22 @@ using std::partial_sort;
 using std::partial_sort_copy;
 using std::sort;
 using std::stable_sort;
+using std::string;
 using std::vector;
 
+// Helper function to print all the elements in a vector
 void print(vector<int> &v) {
   for (auto i : v) {
     cout << i << " ";
   }
   cout << endl;
 }
+
+// Struct for stable sort example
+struct Employee {
+  int ID;
+  string name;
+};
 
 int main() {
   // Create a vector with "random" numbers
@@ -55,6 +64,25 @@ int main() {
   auto it_2 = partial_sort_copy(begin(v), end(v), begin(copy), end(copy));
   print(v);
   print(copy);
+
+  // We can use stable sort if we want to retain the relative order of elements
+  // with the same value. While this isn't relevant for integers, it can be for
+  // sorting objects
+  vector<Employee> v_2 = {{50, "Bill"}, {20, "Mollie"}, {50, "Nick"}};
+  stable_sort(begin(v_2), end(v_2), [](const Employee &e1, const Employee &e2) {
+    return e1.ID < e2.ID;
+  });
+
+  // Dump the sorted vector
+  for (auto i : v_2) {
+    cout << i.ID << " " << i.name << endl;
+  }
+
+  // We can use nth_element to place one element in sorted order, and partition
+  // the other elements around it
+  // Here's a simple way we can find the median element
+  nth_element(begin(v), begin(v) + v.size() / 2, end(v));
+  print(v);
 
   return 0;
 }
