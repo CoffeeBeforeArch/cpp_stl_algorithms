@@ -59,6 +59,7 @@ int main() {
   // If we Don't want to modify the original array we can copy the sorted
   // elements to a new vector
   // Will copy until the output vector is full (first 3 elements in this case)
+  // it_2 points to the end of the copied range
   v = {49, 21, 24, 18, 94, 1, 12, 38, 44};
   vector<int> copy(3);
   auto it_2 = partial_sort_copy(begin(v), end(v), begin(copy), end(copy));
